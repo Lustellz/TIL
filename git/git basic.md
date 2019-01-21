@@ -3,7 +3,7 @@
 ## Git에 내 정보 설정
 
 - `git config --global user.name 'Ryeonggyeong Gwon'`: 이름 설정
-- `git confic --global user.email 'lustellz@gmail.com'`: 이메일 설정
+- `git config --global user.email 'lustellz@gmail.com'`: 이메일 설정
 - git config --global --list: 정보 설정 확인
 
 ## Git repo를 처음 생성한 경우
