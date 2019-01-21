@@ -38,7 +38,7 @@
 ```bash
 # Git 이름, 이메일 재설정
 git config --global user.name 'Ryeonggyeong Gwon'
-git conific --global user.email
+git config --global user.email
 'lustellz@gmail.com'
 
 # GitHub 로그인 정보 초기화
