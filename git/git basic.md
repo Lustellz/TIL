@@ -8,7 +8,7 @@
 
 ## Git repo를 처음 생성한 경우
 
-- git init`: git 초기화. 지금 폴더를 git으로 관리하겠음 (관리하려는 폴더 안에서 입력)
+- `git init`: git 초기화. 지금 폴더를 git으로 관리하겠음 (관리하려는 폴더 안에서 입력)
 - `git remote add origin 주소`: 원격 저장소(remote repository) 주소 등록
   - `git remote set-url origin 주소`: 원격 저장소 수정
 
