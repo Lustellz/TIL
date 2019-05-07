@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+    <!-- 1. v-text({{}}): 문자열 취급 / v-html: 실제 html을 나타냄(?) -->
+    <div id="app">
+        <div v-test = "header">
+        </div>
+        <!-- 2. v-if / v-show  -->
+        <h1 v-if="visible">v-if true</h1> <!-- 없앰 -->
+        <h1 v-show="visible">v-show true</h1> <!-- 숨김 -->
+    </div>
+
+    <script>
+        const app = new Vue({
+            //$ 표시
+            // 3. app.$el / app.$data
+            el: '#app', //$data 혹은 $el로 vue instance 속성에 접근할 수 있음
+            data:{
+                header: '<h1> 제목입니다. </h1>',
+                visible: true,
+
+            }
+        })
+
+    </script>
+    <!-- 4. v-on === '@', v-bind === ':' -->
+</body>
+
+<!-- 독특한 타입 -->
+<!-- NaN: Not a Number 문자임(숫자가 아니라는 의미) type: number-->
+<!-- undefined: 정의되지 않음 type: undifined-->
+<!-- null: 없는 값 type: object -->
+</html>

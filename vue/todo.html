@@ -6,16 +6,41 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <style>
+        .completed{
+            text-decoration: line-through;
+            opacity: 0.6; 
+        }
+    </style>
 </head>
 <body>
     <div id="app">
+        <select v-model="status">
+            <option value="all">All</option>
+            <option value="active">Active</option>
+            <option value="completed">Completed</option>
+        </select>
         <ul>
-            <li v-for="todo in todos" v-if="!todo.completed" v-on:click="check(todo)">
-                {{todo.content}}
+            <!--<li v-for="todo in todos" v-if="!todo.completed" v-on:click="check(todo)">-->
+            <li v-for="todo in todosByStatus" v-bind:key="todo.id">
+                <input type ="checkbox" v-model="todo.completed">
+                <span v-bind:class="todo.completed ? 'completed':''">{{todo.content}}</span>
+                <!-- v-bind:class="{completed: todo.completed}" -->
             </li>
-            <li v-else v-on:click="check(todo)">Completed</li>
-
+            <div v-bind:style="{color: 'red', fontSize: '30px'}">
+                <span>Red Text, 30px</span>
+                <!-- <span>{{newTodo.split('').reverse().join('')}} 직관적이지 않으므로 computed 속성에 추가</span> -->
+            </div>
+            <!--<li v-else v-on:click="check(todo)">Completed</li>-->
+            <div>
+            <input type="text" v-model="newTodo" v-on:keyup.enter="addTodo"> <!--addTodo의 ender 키가 누른 상태에서 해제되었을 때-->
+            <button v-on:click="addTodo">+</button>
+        
             <!-- v-on -->
+            </div>
+            <footer>
+            <button v-on:click="deleteTodo">Clear</button>
+            </div>
 
         </ul>
     </div>
@@ -23,25 +48,27 @@
         const app = new Vue({
             el: '#app',
             data: {
+                status: 'all', //임의의 값으로 지정해 놓음
+                newTodo : '',
 
                 todos: [
-                    {
+                    {   id: 1,
                         content:'운동',
                         completed: false,
                     },
-                    {
+                    {   id:2,
                         content:'라미야',
                         completed: false,
                     },
-                    {
+                    {   id:3,
                         content:'밥먹기',
                         completed: false,
                     },
-                    {
+                    {   id:4,
                         content:'샤워하기',
                         completed: false,
                     },
-                    {
+                    {   id:5,
                         content:'드렉슬러',
                         completed: true,
                     },
@@ -51,9 +78,46 @@
             methods: {
                 check: function(todo){
                     todo.completed = !todo.completed
+                },
+                addTodo: function(){
+                    this.todos.push({
+                        id: Date.now(),
+                        content: this.newTodo,
+                        completed: false,
+                    })
+                    this.newTodo = ''
+                },
+                deleteTodo: function(){
+                    //const result = todos.filter(completed=>completed===true)
+                    
+                   const notCompleltedTodos = this.todos.filter((todo)=>{
+                       return !todo.completed
+                   })
+                   this.todos = notCompleltedTodos
+                },
+            },
+
+            computed:{//미리 계산되어야 하는 것들
+                /*reverseNewTodo:function(){
+                    return this.newTodo.split('').reverse().join('')
+                }, 위에서 표현하려 했던 것을 여기 작성함으로 span 안에는 {{reverseNewTodo}}만으로도 충분하게 됨*/
+                todosByStatus: function(){
+                    if (this.status==='active'){
+                        return this.todos.filter((todo)=>{
+                            return !todo.completed
+                        })
+                    }
+
+                if(this.status ==='completed'){
+                    return this.todos.filter((todo)=>{
+                        return todo.completed
+                    })
                 }
-            }
-        })
+                return this.todos
+            },
+        
+        },
+    })
     </script>
 </body>
 </html>
