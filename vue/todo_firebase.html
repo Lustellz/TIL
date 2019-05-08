@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.9.1/firebase.js"></script>
+    <!-- VueFire -->
+    <script src="https://unpkg.com/vuefire/dist/vuefire.js"></script>
+    <script>
+        // Initialize Firebase
+        // TODO: Replace with your project's customized code snippet
+        var config = {
+            apiKey: "AIzaSyDP5sY-pHjgFKvABAuEGb5mj9lSgKxFuHs",
+            authDomain: "vue-todo-0508.firebaseapp.com",
+            databaseURL: "https://vue-todo-0508.firebaseio.com",
+            projectId: "vue-todo-0508",
+
+        };
+        firebase.initializeApp(config);
+    </script>
+    <style>
+        .completed {
+            text-decoration: line-through;
+            opacity: 0.6;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <select v-model="status">
+            <option value="all">All</option>
+            <option value="active">Active</option>
+            <option value="completed">Completed</option>
+        </select>
+        <ul>
+            <li v-for="todo in todosByStatus" v-bind:key="todo.id">
+                <input type="checkbox" v-model="todo.completed" v-on:change="updateTodo(todo)">
+                <span v-bind:class="todo.completed ? 'completed':''">{{todo.content}}</span>
+
+            </li>
+
+            <div>
+                <input type="text" v-model="newTodo" v-on:keyup.enter="addTodo">
+                <button v-on:click="addTodo">+</button>
+
+
+            </div>
+            <footer>
+                <button v-on:click="deleteTodo">Clear</button>
+    </div>
+
+    </ul>
+    </div>
+    <script>
+        const database = firebase.database()
+
+        const app = new Vue({
+            el: '#app',
+            data: {
+                status: 'all',
+                newTodo: '',
+
+                /*todos: [
+                    {   id: 1,
+                        content:'운동',
+                        completed: false,
+                    },
+                    {   id:2,
+                        content:'라미야',
+                        completed: false,
+                    },
+                    {   id:3,
+                        content:'밥먹기',
+                        completed: false,
+                    },
+                    {   id:4,
+                        content:'샤워하기',
+                        completed: false,
+                    },
+                    {   id:5,
+                        content:'드렉슬러',
+                        completed: true,
+                    },
+                    
+                ]*/
+
+            },
+            firebase: {
+                todos: database.ref('messages'), // firebase와 연결됨
+            },
+
+            methods: {
+                check: function (todo) {
+                    todo.completed = !todo.completed
+                },
+                addTodo: function () {
+                    this.$firebaseRefs.todos.push({
+                        id: Date.now(),
+                        content: this.newTodo,
+                        completed: false,
+                    })
+                    this.newTodo = ''
+                },
+                deleteTodo: function () {
+                    const compleltedTodos = this.todos.filter((todo) => {
+                        return todo.completed
+                    })
+
+                    compleltedTodos.forEach((todo) => {
+                        this.$firebaseRefs.todos.child(todo['.key']).remove()
+                    })
+                },
+                updateTodo: function (todo) {
+                    const newTodo = { ...todo }
+                    delete newTodo['.key']
+                    this.$firebaseRefs.todos.child(todo['.key']).set(newTodo)
+                },
+            },
+
+            computed: {
+
+                todosByStatus: function () {
+                    if (this.status === 'active') {
+                        return this.todos.filter((todo) => {
+                            return !todo.completed
+                        })
+                    }
+
+                    if (this.status === 'completed') {
+                        return this.todos.filter((todo) => {
+                            return todo.completed
+                        })
+                    }
+                    return this.todos
+                },
+
+            },
+        })
+    </script>
+</body>
+
+</html>
