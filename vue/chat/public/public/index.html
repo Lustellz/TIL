@@ -28,6 +28,12 @@
 </head>
 
 <body>
+    <p>
+        <li>작성된 모든 메세지는 페이지 내에서 공개됩니다.</li>
+        <li>욕설과 비방 희롱 등의 부적절한 글은 삭제 조치합니다.</li>
+        <li>작성된 글은 데이터베이스에서 직접 지우는 방식이기 때문에(기능을 추가할 생각이 없습니다.) 작성자가 임의로 삭제할 수 없습니다.</li>
+    </p>
+
     <div id="app">
         <div v-if="currentUser.uid">
             <div>
@@ -36,7 +42,7 @@
             </div>
 
             <p v-for="message in messages" :key="message['.key']">
-                <b>{{message.username}}</b> {{ message.content }}<br>
+                <b>{{currentUser.email}}</b> {{ message.content }}<br>
             </p>
 
             <input type="text" v-model.trim="newMessage" v-on:keyup.enter="addMessage">
