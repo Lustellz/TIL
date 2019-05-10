@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <ul>
+            <li v-for="post in posts">
+                <h3>{{post.id}}. {{post.title}}</h3>
+                <span>userId: {{post.userId}}</span>
+                <p>{{post.body}}</p>
+            </li>
+        </ul>
+    </div>
+    <script>
+        const app = new Vue({
+            el: '#app',
+            data: {
+                posts: [],
+            },
+            methods: {
+                getPosts: function () {
+                    axios.get('http://jsonplaceholder.typicode.com/posts')
+                        .then((response) => {
+                            return response.data
+                        })//promise.then
+                        .then((posts) => {//posts=response.data [{...}, {...}, {...}]
+                            posts.forEach((post) => {//데이터를 조작하지는 않음
+
+                            })
+                            const newPosts = posts.map((post) => {//파라미터를 받아 반복으로 새로운 배열을 생성
+                                //post = {...}
+                                return post
+                            })
+
+                            const filteredPosts = posts.filter((post)=>{
+                                return post.userId===1
+                            })
+
+                            this.posts = filteredPosts//this: Vue 인스턴스 자체를 가리킴 === this.$data.posts
+                            //받아온 posts를 data에 만들어 놓은 posts 배열 객체에 넣음
+                        })
+                }
+            },
+        })
+    </script>
+</body>
+
+</html>
