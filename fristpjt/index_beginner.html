@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- META -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <meta property="og:title" content="og title" />
+    <meta property="og:description" content="og desc" />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="" />
+    <meta property="og:url" content="" />
+    <meta name="keywords" content="key1, key2, key3" />
+    <meta name="description" content="desc" />
+
+    <!-- Favicon -->
+    <link href="" rel="shortcut icon" />
+
+    <!-- CSS -->
+    <link href="https://fonts.googleapis.com/css?family=Gaegu&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:700&display=swap" rel="stylesheet"/>
+    <link rel="stylesheet" href="./css/reset.css" />
+    <link rel="stylesheet" href="./css/style.css" />
+
+    <!--JS-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="./js/ld.js"></script>
+
+    <title>My Profile</title>
+  </head>
+  <body>
+    <!-- Header -->
+    <div class="header-wrapper">
+      <div class="header-contents">
+        <!-- 타이틀 -->
+        <p class="title" onclick="ssafy.ld.goPage(0)">RG GWON</p>
+
+        <!-- 상단 메뉴 && 모바일 메뉴 -->
+        <div class="nav-bar">
+          <ul>
+            <li>
+              <a class="a-nav-bar" onClick="ssafy.ld.goPage(1)">About Me</a>
+            </li>
+            <li>
+              <a class="a-nav-bar" onClick="ssafy.ld.goPage(2)">Skills</a>
+            </li>
+            <li>
+              <a class="a-nav-bar" onClick="ssafy.ld.goPage(3)">Contact</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Main -->
+    <div class="main-wrapper">
+      <!-- section-1 -->
+      <div class="section section-1">
+        <div class="section-1-background"></div>
+        <div class="section-content">
+          <!-- To do -->
+          <h2>
+            <span>더 나은 세상을 만들기 위한 개발자</span> <br />
+            <span>Developer to Make a Better World.</span>
+          </h2>
+        </div>
+        <!-- Scroll Down Button -->
+        <button class="btn-scroll-down" onclick="ssafy.ld.goPage(1)">
+          Scroll down to Continue
+        </button>
+      </div>
+
+      <!-- section-2 : 자기소개 -->
+      <div class="section section-2">
+        <div class="section-content" style="text-align:left">
+          <div>
+            <p class="txt">About Me</p>
+            <h3 class="txt">Gwon RyeongGyeong</h3>
+          <p class="txt">
+            <br>
+            안녕하세요, 더 나은 세상을 만들기 위한 개발자 권령경입니다.<br>
+            소프트웨어의 가능성으로 누구나 필요한 상황에 적합한 도움을<br>
+            받을 수 있도록 하고 싶습니다.
+          </p>
+          <!-- To do -->
+        </div>
+
+        <div>
+            <img src="assets/img/AI-Future-WP.jpg" alt="" width="600" />
+        </div>
+
+        </div>
+
+      </div>
+
+      <!-- section-3 : 보유 기술 역량 -->
+      <div class="section section-3">
+        <div class="section-content">
+          <!-- To do -->
+          <h3>Skills</h3>
+          <div>
+              <ul>
+                <li>HTML5</li>
+                
+                <li>60% <span class="score score-html5"></span></li>
+                <li>CSS3</li>
+                <li>70% <span class="score score-css3"></span></li>
+              </ul>
+              <ul>
+                <li>Javascript</li>
+                <li>40% <span class="score score-js"></span></li>
+                <li>Vue.js</li>
+                <li>50% <span class="score score-vue"></span></li>
+              </ul>
+            </div>
+        </div>
+      </div>
+
+      <div class="section section-4">
+        <div class="section-content">
+          <!-- To do -->
+          <h3>Contact</h3>
+          <br>
+          <div>
+          github: <a href="https://github.com/Lustellz" target="blank">Lustellz</a><br>
+          email: lustellz@gmail.com
+        </div>
+        </div>
+      </div>
+
+      <!-- footer-->
+      <div class="footer">
+        <div>
+          <br>
+          Copyright 2019 lustellz All right reserved
+          <p>
+           
+
+          </p>
+        </div>
+        
+      </div>
+    </div>
+
+    <!-- init script -->
+    <script type="text/javascript" charset="utf-8">
+      $(document).ready(function() {
+        // scroll active
+        setTimeout(function() {
+          var items = document.querySelectorAll(".section");
+          items[0].classList.add("active");
+        }, 500);
+
+        ssafy.ld.init();
+      });
+    </script>
+  </body>
+</html>
